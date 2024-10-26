@@ -1,7 +1,6 @@
 package com.G;
 
 import com.G.passwordvalidator.PasswordValidator;
-
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -38,3 +37,4 @@ public class ValidatorTest {
         assertFalse(validator.isValid("CoolPassword123"));
     }
 }
+//Bun
