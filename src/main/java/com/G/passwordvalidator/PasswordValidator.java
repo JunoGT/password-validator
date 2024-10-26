@@ -11,4 +11,5 @@ public interface PasswordValidator {
      * @return true if the password is valid, false otherwise
      */
     boolean isValid(String password);
+    //aaa
 }
