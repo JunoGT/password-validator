@@ -3,6 +3,7 @@ package com.G.passwordvalidator;
 /**
  * Custom implementation of PasswordValidator with specific criteria.
  */
+
 public class CustomPasswordValidator implements PasswordValidator {
     @Override
     public boolean isValid(String password) {
