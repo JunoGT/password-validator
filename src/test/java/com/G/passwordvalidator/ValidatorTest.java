@@ -30,7 +30,7 @@ public class ValidatorTest {
     @Test
     @DisplayName("Test valid password meets all criteria")
     void testValidPassword() {
-        String password = "ValidPass1";
+        String password = "Validschwarzpass1";
         assertTrue(validator.isValid(password), "Password should be valid");
     }
 
@@ -107,7 +107,13 @@ public class ValidatorTest {
     @Test
     @DisplayName("Test minimum length boundary (8 characters)")
     void testMinimumLengthBoundary() {
-        String password = "Abcdef1g";
-        assertTrue(validator.isValid(password), "Password meets the minimum length and should be valid");
+        String password = "Aaaaaaaaa1";
+        assertFalse(validator.isValid(password), "Password meets the minimum length and should be valid");
+    }
+    @Test
+    @DisplayName("Test if Sponsor is Given")
+    void testSponsor() {
+        String password = "Hajaschwarz";
+        assertFalse(validator.isValid(password), "Password has a sponsor");
     }
 }
