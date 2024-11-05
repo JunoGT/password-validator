@@ -9,6 +9,7 @@ public class CustomPasswordValidator implements PasswordValidator {
     public boolean isValid(String password) {
         // Implementation logic here
         return false;//to be done
+        // TEST
 
     }
 }
