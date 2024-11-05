@@ -25,6 +25,7 @@ public class ValidatorTest {
      * - At least one uppercase letter
      * - At least one lowercase letter
      * - At least one numeric digit
+     *
      */
     @Test
     @DisplayName("Test valid password meets all criteria")
