@@ -21,11 +21,10 @@ import java.util.regex.Pattern;
 public class CustomPasswordValidator implements PasswordValidator {
     // Regular expression patterns for password requirements
     private static final Pattern UPPERCASE_PATTERN = Pattern.compile(".*[A-Z].*");
-    private static final Pattern LOWERCASE_PATTERN = Pattern.compile(".*[a-z]:*");
-    private static final Pattern DIGITS_PATTERN = Pattern.compile(".*\\d:*");
+    private static final Pattern LOWERCASE_PATTERN = Pattern.compile(".*[a-z].*");
+    private static final Pattern DIGITS_PATTERN = Pattern.compile(".*\\d.*");
     //Add Sponsor here
-
-
+    private static final Pattern SPONSOR_PATTERN = Pattern.compile(".*schwarz.*", Pattern.CASE_INSENSITIVE);
     /**
     * @param password the password to validate
      * @return {@code true} if the password meets all criteria; {@code false} otherwise
@@ -36,26 +35,44 @@ public class CustomPasswordValidator implements PasswordValidator {
     @Override
     public boolean isValid(String password) {
         //Check minimum length and if null
-        if (password == null || password.length() < 8) {
+        if (password != null && !password.isEmpty()) {
+            if (password.length() >= 8) {
+
+                //Check one uppercase letter
+                if (UPPERCASE_PATTERN.matcher(password).matches()) {
+
+                    //Check on lowercase letter
+                    if (LOWERCASE_PATTERN.matcher(password).matches()) {
+
+                        //Check one digit
+                        if (DIGITS_PATTERN.matcher(password).matches()) {
+
+                                //Check for Sponsor
+                                if (SPONSOR_PATTERN.matcher(password).matches()) {
+                                    return true;
+                                } else {
+                                    System.out.println("You dont have our Sponsor included (Its Schwarz)!");
+                                    return false;
+                                }
+                        } else {
+                            System.out.println("You dont have a Digit!");
+                            return false;
+                        }
+                    }else {
+                        System.out.println("You dont have a Lowercase Letter!");
+                        return false;
+                    }
+                } else {
+                    System.out.println("You dont have an Uppercase Letter!");
+                    return false;
+                }
+            } else {
+                System.out.println("Your Password is too short!");
+                return false;
+            }
+        }else {
+            System.out.println("You need to enter a Password!");
             return false;
         }
-
-        //Check one uppercase letter
-        if (!UPPERCASE_PATTERN.matcher(password).matches()) {
-            return false;
-        }
-
-        //Check on lowercase letter
-        if (!LOWERCASE_PATTERN.matcher(password).matches()) {
-            return false;
-        }
-
-        //Check one digit
-        if (!DIGITS_PATTERN.matcher(password).matches()) {
-            return false;
-        }
-
-
-        return true;
     }
 }
