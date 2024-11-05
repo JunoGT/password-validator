@@ -35,7 +35,7 @@ public class CustomPasswordValidator implements PasswordValidator {
 
     @Override
     public boolean isValid(String password) {
-        //Check minimum lenght and if null
+        //Check minimum length and if null
         if (password == null || password.length() < 8) {
             return false;
         }
