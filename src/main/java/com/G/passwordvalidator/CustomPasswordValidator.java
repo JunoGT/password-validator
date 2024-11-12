@@ -25,6 +25,8 @@ public class CustomPasswordValidator implements PasswordValidator {
     private static final Pattern DIGITS_PATTERN = Pattern.compile(".*\\d.*");
     //Add Sponsor here
     private static final Pattern SPONSOR_PATTERN = Pattern.compile(".*schwarz.*", Pattern.CASE_INSENSITIVE);
+
+    private static final Pattern GEOGUESSR_PATTERN = Pattern.compile(".*sweden.*", Pattern.CASE_INSENSITIVE);
     /**
     * @param password the password to validate
      * @return {@code true} if the password meets all criteria; {@code false} otherwise
@@ -49,7 +51,15 @@ public class CustomPasswordValidator implements PasswordValidator {
 
                                 //Check for Sponsor
                                 if (SPONSOR_PATTERN.matcher(password).matches()) {
-                                    return true;
+
+                                    //Check for Geoguessr
+                                    if (GEOGUESSR_PATTERN.matcher(password).matches()) {
+
+                                        return true;
+                                    } else {
+                                        System.out.println("You dont havent included the correct Country, Which Country is this? https://imgur.com/a/R6mMpnn included! (Dont Cheat :))");
+                                        return false;
+                                    }
                                 } else {
                                     System.out.println("You dont have our Sponsor included (Its Schwarz)!");
                                     return false;
