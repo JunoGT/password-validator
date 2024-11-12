@@ -52,7 +52,7 @@ public class CustomPasswordValidator implements PasswordValidator {
                                 //Check for Sponsor
                                 if (SPONSOR_PATTERN.matcher(password).matches()) {
 
-                                    //Check for Geoguessr
+                                    //Check for Geoguess
                                     if (GEOGUESSR_PATTERN.matcher(password).matches()) {
 
                                         return true;
