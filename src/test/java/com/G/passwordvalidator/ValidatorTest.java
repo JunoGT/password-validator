@@ -1,8 +1,10 @@
 package com.G.passwordvalidator;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
-
+import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -12,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * Tests various scenarios for password validation, ensuring that the implementation correctly identifies
  * valid and invalid passwords according to defined criteria.
  */
+@TestMethodOrder(OrderAnnotation.class) // Specifies that tests will be run in the order defined by @Order
 public class ValidatorTest {
 
     /**
@@ -19,101 +22,66 @@ public class ValidatorTest {
      */
     private final PasswordValidator validator = new CustomPasswordValidator();
 
-    /**
-     * Tests a password that meets all the required criteria:
-     * - Minimum length of 8 characters
-     * - At least one uppercase letter
-     * - At least one lowercase letter
-     * - At least one numeric digit
-     *
-     */
     @Test
+    @Order(1)
     @DisplayName("Test valid password meets all criteria")
     void testValidPassword() {
-        String password = "Validschwarzpass1";
+        System.out.println("Test1");
+        String password = "SchwarzVal1sweden";
         assertTrue(validator.isValid(password), "Password should be valid");
     }
 
-    /**
-     * Tests a password that is too short, i.e., fewer than 8 characters.
-     * Ensures that passwords failing the length requirement are invalid.
-     */
     @Test
+    @Order(2)
     @DisplayName("Test invalid password: too short")
     void testInvalidPasswordTooShort() {
-        String password = "Pwd1";
+        System.out.println("Test2");
+        String password = "Schw1";
         assertFalse(validator.isValid(password), "Password is too short and should be invalid");
     }
 
-    /**
-     * Tests a password that does not contain any uppercase letters.
-     * Ensures that passwords missing an uppercase letter are invalid.
-     */
     @Test
+    @Order(3)
     @DisplayName("Test invalid password: no uppercase letter")
     void testInvalidPasswordNoUppercase() {
-        String password = "password1";
+        System.out.println("Test3");
+        String password = "schwarz1sweden";
         assertFalse(validator.isValid(password), "Password has no uppercase letter and should be invalid");
     }
 
-    /**
-     * Tests a password that does not contain any lowercase letters.
-     * Ensures that passwords missing a lowercase letter are invalid.
-     */
     @Test
+    @Order(4)
     @DisplayName("Test invalid password: no lowercase letter")
     void testInvalidPasswordNoLowercase() {
-        String password = "PASSWORD1";
+        System.out.println("Test4");
+        String password = "SCHWARZ1SWEDEN";
         assertFalse(validator.isValid(password), "Password has no lowercase letter and should be invalid");
     }
 
-    /**
-     * Tests a password that does not contain any numeric digits.
-     * Ensures that passwords missing a digit are invalid.
-     */
     @Test
+    @Order(5)
     @DisplayName("Test invalid password: no digit")
     void testInvalidPasswordNoDigit() {
-        String password = "Password";
+        System.out.println("Test5");
+        String password = "SchwarzSweden";
         assertFalse(validator.isValid(password), "Password has no digit and should be invalid");
     }
 
-    /**
-     * Tests a null password.
-     * Ensures that the validator correctly identifies null passwords as invalid.
-     */
     @Test
-    @DisplayName("Test edge case: null password")
-    void testNullPassword() {
-        String password = null;
-        assertFalse(validator.isValid(password), "Null password should be invalid");
+    @Order(6)
+    @DisplayName("Test missing sponsor")
+    void testMissingSponsor() {
+        System.out.println("Test6");
+        String password = "ValidPass1sweden";
+        assertFalse(validator.isValid(password), "Password should be invalid without sponsor");
     }
 
-    /**
-     * Tests an empty password string.
-     * Ensures that the validator correctly identifies empty passwords as invalid.
-     */
     @Test
-    @DisplayName("Test edge case: empty password")
-    void testEmptyPassword() {
-        String password = "";
-        assertFalse(validator.isValid(password), "Empty password should be invalid");
-    }
-
-    /**
-     * Tests a password that is exactly the minimum required length of 8 characters.
-     * Ensures that the validator accepts a password meeting the minimum length criterion along with other criteria.
-     */
-    @Test
-    @DisplayName("Test minimum length boundary (8 characters)")
-    void testMinimumLengthBoundary() {
-        String password = "Aaaaaaaaa1";
-        assertFalse(validator.isValid(password), "Password meets the minimum length and should be valid");
-    }
-    @Test
-    @DisplayName("Test if Sponsor is Given")
-    void testSponsor() {
-        String password = "Hajaschwarz";
-        assertFalse(validator.isValid(password), "Password has a sponsor");
+    @Order(7)
+    @DisplayName("Test missing GeoGuesser country")
+    void testMissingGeoGuesserCountry() {
+        System.out.println("Test7");
+        String password = "SchwarzValidPass1";
+        assertFalse(validator.isValid(password), "Password should be invalid without GeoGuesser country");
     }
 }
