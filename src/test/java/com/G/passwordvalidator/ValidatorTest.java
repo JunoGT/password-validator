@@ -15,12 +15,12 @@ import static org.junit.jupiter.api.Assertions.*;
  * valid and invalid passwords according to defined criteria.
  */
 @TestMethodOrder(OrderAnnotation.class) // Specifies that tests will be run in the order defined by @Order
-public class PasswordLengthValidatorTest {
+public class ValidatorTest {
 
     /**
      * An instance of the CustomPasswordValidator to validate passwords.
      */
-    private final PasswordValidator validator = new CustomPasswordValidator();
+    private final PasswordValidator validator = new PasswordLengthValidator();
 
     @Test
     @Order(1)
@@ -28,7 +28,7 @@ public class PasswordLengthValidatorTest {
     void testValidPassword() {
         System.out.println("Test1");
         String password = "SchwarzVal1sweden";
-        assertTrue(validator.isValid(password), "Password should be valid");
+        assertTrue(validator.validate(password), "Password should be valid");
     }
 
     @Test
@@ -37,7 +37,7 @@ public class PasswordLengthValidatorTest {
     void testInvalidPasswordTooShort() {
         System.out.println("Test2");
         String password = "Schw1";
-        assertFalse(validator.isValid(password), "Password is too short and should be invalid");
+        assertFalse(validator.validate(password), "Password is too short and should be invalid");
     }
 
     @Test
@@ -46,7 +46,7 @@ public class PasswordLengthValidatorTest {
     void testInvalidPasswordNoUppercase() {
         System.out.println("Test3");
         String password = "schwarz1sweden";
-        assertFalse(validator.isValid(password), "Password has no uppercase letter and should be invalid");
+        assertFalse(validator.validate(password), "Password has no uppercase letter and should be invalid");
     }
 
     @Test
@@ -55,7 +55,7 @@ public class PasswordLengthValidatorTest {
     void testInvalidPasswordNoLowercase() {
         System.out.println("Test4");
         String password = "SCHWARZ1SWEDEN";
-        assertFalse(validator.isValid(password), "Password has no lowercase letter and should be invalid");
+        assertFalse(validator.validate(password), "Password has no lowercase letter and should be invalid");
     }
 
     @Test
@@ -64,7 +64,7 @@ public class PasswordLengthValidatorTest {
     void testInvalidPasswordNoDigit() {
         System.out.println("Test5");
         String password = "SchwarzSweden";
-        assertFalse(validator.isValid(password), "Password has no digit and should be invalid");
+        assertFalse(validator.validate(password), "Password has no digit and should be invalid");
     }
 
     @Test
@@ -73,7 +73,7 @@ public class PasswordLengthValidatorTest {
     void testMissingSponsor() {
         System.out.println("Test6");
         String password = "ValidPass1sweden";
-        assertFalse(validator.isValid(password), "Password should be invalid without sponsor");
+        assertFalse(validator.validate(password), "Password should be invalid without sponsor");
     }
 
     @Test
@@ -82,6 +82,6 @@ public class PasswordLengthValidatorTest {
     void testMissingGeoGuesserCountry() {
         System.out.println("Test7");
         String password = "SchwarzValidPass1";
-        assertFalse(validator.isValid(password), "Password should be invalid without GeoGuesser country");
+        assertFalse(validator.validate(password), "Password should be invalid without GeoGuesser country");
     }
 }
