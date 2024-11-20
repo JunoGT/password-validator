@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * valid and invalid passwords according to defined criteria.
  */
 @TestMethodOrder(OrderAnnotation.class) // Specifies that tests will be run in the order defined by @Order
-public class ValidatorTest {
+public class PasswordLengthValidatorTest {
 
     /**
      * An instance of the CustomPasswordValidator to validate passwords.
