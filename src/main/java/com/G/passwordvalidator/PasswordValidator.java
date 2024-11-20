@@ -1,14 +1,32 @@
-package com.G.passwordvalidator;
+package com.cthiebaud.passwordvalidator;
 
 /**
- * Interface for password validation.
+ * The {@code PasswordValidator} interface defines a contract for validating
+ * potential passwords based on specific criteria. Implementing classes must
+ * provide their own validation logic and a description of the criteria used.
+ * 
+ * <p>
+ * This interface facilitates the creation of various password validation
+ * strategies, allowing users to easily integrate and manage multiple validation
+ * rules in a consistent manner.
+ * </p>
+ * 
+ * @see ValidationResult
  */
 public interface PasswordValidator {
     /**
-     * Checks if a password meets the validation criteria.
-     *
-     * @param password The password string to validate
-     * @return true if the password is valid, false otherwise
+     * Validates a potential password based on specific criteria.
+     * 
+     * @param potentialPassword the password to validate
+     * @return ValidationResult containing the validation status and an optional
+     *         message describing the result of the validation
      */
-    boolean isValid(String password);
+    ValidationResult validate(String potentialPassword);
+
+    /**
+     * Describes the validation criteria of this PasswordValidator.
+     * 
+     * @return A string description of the validation criteria.
+     */
+    // String describe();
 }
