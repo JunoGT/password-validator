@@ -34,7 +34,7 @@ public class PasswordLengthValidator implements PasswordValidator {
      * @return {@code true} if the password meets all criteria; {@code false} otherwise
      */
     @Override
-    public boolean isValid(String password) {
+    public ValidationResult validate(String potentialPassword) {
         if (password == null || password.isEmpty()) {
             System.out.println("You need to enter a Password!");
             return false;
