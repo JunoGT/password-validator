@@ -7,7 +7,30 @@
     <groupId>com.timo</groupId>
     <artifactId>password-validator</artifactId>
     <version>1.0-SNAPSHOT</version>
+    
+    <developers>
+        <developer>
+            <id>JunoGT</id>
+            <name>Timo Gerlinger</name>
+            <email>tim.gerlinger.24@heilbronn.dhbw.de</email>
+        </developer>
+             
+        <developer>
+            <id>xJvstvs</id>
+            <name>Justus Krahl</name>
+            <email>jus.krahl.24@heilbronn.dhbw.de</email>
+        </developer> 
+        <developer>
+            <id>Matthis404</id>
+            <name>Matthis Kollmann</name>
+            <email>mat.kollmann.24@heilbronn.dhbw.de</email>
+        </developer>     
+    </developers>
 
+    <scm>
+        <url>https://github.com/JunoGT/password-validator</url>
+    </scm>     
+         
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
