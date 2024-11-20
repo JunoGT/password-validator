@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
  * </ul>
  * These requirements add both security and a bit of creativity to the password policy.
  */
-public class CustomPasswordValidator implements PasswordLengthValidator {
+public class PasswordLengthValidator implements PasswordValidator {
 
     // Regular expression patterns for password requirements
     private static final Pattern UPPERCASE_PATTERN = Pattern.compile(".*[A-Z].*");
