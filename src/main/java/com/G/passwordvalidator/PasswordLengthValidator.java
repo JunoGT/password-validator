@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
  *   <li>Contains at least one lowercase letter</li>
  *   <li>Contains at least one digit</li>
  *   <li>Contains the specified sponsor keyword ("schwarz")</li>
- *   <li>Contains the specified GeoGuessr country ("sweden")</li>
+ *   <li>Contains the specified Country guessed from the link in the Error Message("sweden")</li>
  * </ul>
  * These requirements add both security and a bit of creativity to the password policy.
  */
