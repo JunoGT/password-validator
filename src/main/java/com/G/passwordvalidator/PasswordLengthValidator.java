@@ -1,7 +1,6 @@
 package com.G.passwordvalidator;
 
 import java.util.regex.Pattern;
-
 /**
  * A custom implementation of the {@link PasswordValidator} interface.
  * <p>
@@ -14,7 +13,7 @@ import java.util.regex.Pattern;
  *   <li>Contains at least one lowercase letter</li>
  *   <li>Contains at least one digit</li>
  *   <li>Contains the specified sponsor keyword ("schwarz")</li>
- *   <li>Contains the specified Country guessed from the link in the Error Message("sweden")</li>
+ *   <li>Contains a Geoguesser like quiz in which the user has to find the country of a given Image</li>
  * </ul>
  * These requirements add both security and a bit of creativity to the password policy.
  */
@@ -30,36 +29,36 @@ public class PasswordLengthValidator implements PasswordValidator {
     /**
      * Validates the given password based on predefined criteria.
      *
-     * @param password the password to validate
+     * @param potentialPassword the password to validate
      * @return {@code true} if the password meets all criteria; {@code false} otherwise
      */
     @Override
-    public ValidationResult validate(String potentialPassword) {
-        if (password == null || password.isEmpty()) {
+    public boolean validate(String potentialPassword) {
+        if (potentialPassword == null || potentialPassword.isEmpty()) {
             System.out.println("You need to enter a Password!");
             return false;
         }
-        if (password.length() < 8) {
+        if (potentialPassword.length() < 8) {
             System.out.println("Your Password is too short!");
             return false;
         }
-        if (!UPPERCASE_PATTERN.matcher(password).matches()) {
+        if (!UPPERCASE_PATTERN.matcher(potentialPassword).matches()) {
             System.out.println("You don't have an Uppercase Letter!");
             return false;
         }
-        if (!LOWERCASE_PATTERN.matcher(password).matches()) {
+        if (!LOWERCASE_PATTERN.matcher(potentialPassword).matches()) {
             System.out.println("You don't have a Lowercase Letter!");
             return false;
         }
-        if (!DIGITS_PATTERN.matcher(password).matches()) {
+        if (!DIGITS_PATTERN.matcher(potentialPassword).matches()) {
             System.out.println("You don't have a Digit!");
             return false;
         }
-        if (!SPONSOR_PATTERN.matcher(password).matches()) {
+        if (!SPONSOR_PATTERN.matcher(potentialPassword).matches()) {
             System.out.println("You don't have our Sponsor included (It's Schwarz)!");
             return false;
         }
-        if (!GEOGUESSR_PATTERN.matcher(password).matches()) {
+        if (!GEOGUESSR_PATTERN.matcher(potentialPassword).matches()) {
             System.out.println("You forgot to include the correct Country, Which Country is this? https://imgur.com/a/R6mMpnn included! (Don't Cheat :) )");
             return false;
         }

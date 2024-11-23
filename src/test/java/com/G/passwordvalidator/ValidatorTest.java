@@ -9,7 +9,7 @@ import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Unit tests for the {@link CustomPasswordValidator} implementation of the {@link PasswordValidator} interface.
+ * Unit tests for the {@link PasswordLengthValidator} implementation of the {@link PasswordValidator} interface.
  * <p>
  * Tests various scenarios for password validation, ensuring that the implementation correctly identifies
  * valid and invalid passwords according to defined criteria.
@@ -21,6 +21,15 @@ public class ValidatorTest {
      * An instance of the CustomPasswordValidator to validate passwords.
      */
     private final PasswordValidator validator = new PasswordLengthValidator();
+
+    @Test
+    @Order(0)
+    @DisplayName("Test null password")
+    void testNullPassword() {
+        System.out.println("Test0");
+        String password = null;
+        assertFalse(validator.validate(password), "Password should be invalid when null");
+    }
 
     @Test
     @Order(1)

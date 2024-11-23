@@ -6,7 +6,8 @@
 
     <groupId>com.timo</groupId>
     <artifactId>password-validator</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
     
     <developers>
         <developer>
@@ -14,7 +15,6 @@
             <name>Timo Gerlinger</name>
             <email>tim.gerlinger.24@heilbronn.dhbw.de</email>
         </developer>
-             
         <developer>
             <id>xJvstvs</id>
             <name>Justus Krahl</name>
@@ -29,29 +29,24 @@
 
     <scm>
         <url>https://github.com/JunoGT/password-validator</url>
-    </scm>     
-         
+        <connection>scm:git:https://github.com/JunoGT/password-validator.git</connection>
+        <developerConnection>scm:git:git@github.com:JunoGT/password-validator.git</developerConnection>
+    </scm>
+
+    <distributionManagement>
+        <repository>
+            <id>github-repo</id>
+            <url>https://maven.pkg.github.com/athenaeum-brew/maven-repo</url>
+        </repository>
+    </distributionManagement>
+
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>23</java.version>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-    
-    <dependencies>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.11.3</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>5.11.3</version>
-            <scope>compile</scope>
-        </dependency>
-
-    </dependencies>
 
     <repositories>
         <repository>
@@ -66,10 +61,24 @@
         </repository>
     </repositories>
 
-    <distributionManagement>
-        <repository>
-            <id>athenaeum-brew-maven-repo</id>
-            <url>https://maven.pkg.github.com/athenaeum-brew/maven-repo</url>
-        </repository>
-    </distributionManagement>
+    <dependencies>
+        <dependency>
+            <groupId>com.cthiebaud</groupId>
+            <artifactId>passwordvalidator</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+    </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>5.11.3</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.11.3</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+
 </project>
