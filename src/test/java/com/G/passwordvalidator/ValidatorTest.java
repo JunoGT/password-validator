@@ -1,9 +1,6 @@
 package com.G.passwordvalidator;
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -15,12 +12,20 @@ import static org.junit.jupiter.api.Assertions.*;
  * valid and invalid passwords according to defined criteria.
  */
 @TestMethodOrder(OrderAnnotation.class) // Specifies that tests will be run in the order defined by @Order
-public class ValidatorTest {
+class ValidatorTest {
 
     /**
      * An instance of the CustomPasswordValidator to validate passwords.
      */
-    private final PasswordValidator validator = new PasswordLengthValidator();
+    private PasswordLengthValidator validator;
+
+    /**
+     * Initializes the validator instance before each test.
+     */
+    @BeforeEach
+    void init() {
+        validator = new PasswordLengthValidator();
+    }
 
     @Test
     @Order(0)
@@ -28,7 +33,7 @@ public class ValidatorTest {
     void testNullPassword() {
         System.out.println("Test0");
         String password = null;
-        assertFalse(validator.validate(password), "Password should be invalid when null");
+        assertFalse(validator.validate(password).isValid(), "Password should be invalid when null");
     }
 
     @Test
@@ -37,7 +42,7 @@ public class ValidatorTest {
     void testValidPassword() {
         System.out.println("Test1");
         String password = "SchwarzVal1sweden";
-        assertTrue(validator.validate(password), "Password should be valid");
+        assertTrue(validator.validate(password).isValid(), "Password should be valid");
     }
 
     @Test
@@ -46,7 +51,7 @@ public class ValidatorTest {
     void testInvalidPasswordTooShort() {
         System.out.println("Test2");
         String password = "Schw1";
-        assertFalse(validator.validate(password), "Password is too short and should be invalid");
+        assertFalse(validator.validate(password).isValid(), "Password is too short and should be invalid");
     }
 
     @Test
@@ -55,7 +60,7 @@ public class ValidatorTest {
     void testInvalidPasswordNoUppercase() {
         System.out.println("Test3");
         String password = "schwarz1sweden";
-        assertFalse(validator.validate(password), "Password has no uppercase letter and should be invalid");
+        assertFalse(validator.validate(password).isValid(), "Password has no uppercase letter and should be invalid");
     }
 
     @Test
@@ -64,7 +69,7 @@ public class ValidatorTest {
     void testInvalidPasswordNoLowercase() {
         System.out.println("Test4");
         String password = "SCHWARZ1SWEDEN";
-        assertFalse(validator.validate(password), "Password has no lowercase letter and should be invalid");
+        assertFalse(validator.validate(password).isValid(), "Password has no lowercase letter and should be invalid");
     }
 
     @Test
@@ -73,7 +78,7 @@ public class ValidatorTest {
     void testInvalidPasswordNoDigit() {
         System.out.println("Test5");
         String password = "SchwarzSweden";
-        assertFalse(validator.validate(password), "Password has no digit and should be invalid");
+        assertFalse(validator.validate(password).isValid(), "Password has no digit and should be invalid");
     }
 
     @Test
@@ -82,7 +87,7 @@ public class ValidatorTest {
     void testMissingSponsor() {
         System.out.println("Test6");
         String password = "ValidPass1sweden";
-        assertFalse(validator.validate(password), "Password should be invalid without sponsor");
+        assertFalse(validator.validate(password).isValid(), "Password should be invalid without sponsor");
     }
 
     @Test
@@ -91,6 +96,6 @@ public class ValidatorTest {
     void testMissingGeoGuesserCountry() {
         System.out.println("Test7");
         String password = "SchwarzValidPass1";
-        assertFalse(validator.validate(password), "Password should be invalid without GeoGuesser country");
+        assertFalse(validator.validate(password).isValid(), "Password should be invalid without GeoGuesser country");
     }
 }

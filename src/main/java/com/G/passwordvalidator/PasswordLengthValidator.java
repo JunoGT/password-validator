@@ -1,6 +1,10 @@
 package com.G.passwordvalidator;
 
 import java.util.regex.Pattern;
+
+import com.cthiebaud.passwordvalidator.PasswordValidator;
+import com.cthiebaud.passwordvalidator.ValidationResult;
+
 /**
  * A custom implementation of the {@link PasswordValidator} interface.
  * <p>
@@ -33,35 +37,28 @@ public class PasswordLengthValidator implements PasswordValidator {
      * @return {@code true} if the password meets all criteria; {@code false} otherwise
      */
     @Override
-    public boolean validate(String potentialPassword) {
+    public ValidationResult validate(String potentialPassword) {
         if (potentialPassword == null || potentialPassword.isEmpty()) {
-            System.out.println("You need to enter a Password!");
-            return false;
+            return new ValidationResult(false, "You need to enter a Password!");
         }
         if (potentialPassword.length() < 8) {
-            System.out.println("Your Password is too short!");
-            return false;
+            return new ValidationResult(false, "Your Password is too short!");
         }
         if (!UPPERCASE_PATTERN.matcher(potentialPassword).matches()) {
-            System.out.println("You don't have an Uppercase Letter!");
-            return false;
+            return new ValidationResult(false, "You don't have an Uppercase Letter!");
         }
         if (!LOWERCASE_PATTERN.matcher(potentialPassword).matches()) {
-            System.out.println("You don't have a Lowercase Letter!");
-            return false;
+            return new ValidationResult(false, "You don't have a Lowercase Letter!");
         }
         if (!DIGITS_PATTERN.matcher(potentialPassword).matches()) {
-            System.out.println("You don't have a Digit!");
-            return false;
+            return new ValidationResult(false, "You don't have a Digit!");
         }
         if (!SPONSOR_PATTERN.matcher(potentialPassword).matches()) {
-            System.out.println("You don't have our Sponsor included (It's Schwarz)!");
-            return false;
+            return new ValidationResult(false, "You don't have our Sponsor included (It's Schwarz)!");
         }
         if (!GEOGUESSR_PATTERN.matcher(potentialPassword).matches()) {
-            System.out.println("You forgot to include the correct Country, Which Country is this? https://imgur.com/a/R6mMpnn included! (Don't Cheat :) )");
-            return false;
+            return new ValidationResult(false, "You forgot to include the correct Country, Which Country is this? https://imgur.com/a/R6mMpnn included! (Don't Cheat :) )");
         }
-        return true;
+        return new ValidationResult(true, "");
     }
 }
