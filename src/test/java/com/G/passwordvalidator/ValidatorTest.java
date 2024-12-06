@@ -2,6 +2,8 @@ package com.G.passwordvalidator;
 
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -15,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ValidatorTest {
 
     /**
-     * An instance of the CustomPasswordValidator to validate passwords.
+     * An instance of the PasswordLengthValidator to validate passwords.
      */
     private PasswordLengthValidator validator;
 
@@ -24,9 +26,13 @@ class ValidatorTest {
      */
     @BeforeEach
     void init() {
-        validator = new PasswordLengthValidator();
+        // Initialize validator with dynamic sponsor and GeoGuesser country
+        validator = new PasswordLengthValidator("Schwarz", "Sweden");
     }
 
+    /**
+     * Tests that a null password is considered invalid.
+     */
     @Test
     @Order(0)
     @DisplayName("Test null password")
@@ -36,15 +42,28 @@ class ValidatorTest {
         assertFalse(validator.validate(password).isValid(), "Password should be invalid when null");
     }
 
-    @Test
+    /**
+     * Tests various valid and invalid passwords using parameterized inputs.
+     *
+     * @param password the password to validate
+     * @param isValid  expected validation result
+     */
+    @ParameterizedTest
     @Order(1)
     @DisplayName("Test valid password meets all criteria")
-    void testValidPassword() {
-        System.out.println("Test1");
-        String password = "SchwarzVal1sweden";
-        assertTrue(validator.validate(password).isValid(), "Password should be valid");
+    @CsvSource({
+            "SchwarzVal1sweden, true",
+            "Schwarz2Sweden, true",
+            "InvalidPass, false"
+    })
+    void testPasswordValidation(String password, boolean isValid) {
+        System.out.println("Parameterized Test");
+        assertEquals(isValid, validator.validate(password).isValid(), "Password validation failed for: " + password);
     }
 
+    /**
+     * Tests that a password that is too short is considered invalid.
+     */
     @Test
     @Order(2)
     @DisplayName("Test invalid password: too short")
@@ -54,6 +73,9 @@ class ValidatorTest {
         assertFalse(validator.validate(password).isValid(), "Password is too short and should be invalid");
     }
 
+    /**
+     * Tests that a password without an uppercase letter is considered invalid.
+     */
     @Test
     @Order(3)
     @DisplayName("Test invalid password: no uppercase letter")
@@ -63,6 +85,9 @@ class ValidatorTest {
         assertFalse(validator.validate(password).isValid(), "Password has no uppercase letter and should be invalid");
     }
 
+    /**
+     * Tests that a password without a lowercase letter is considered invalid.
+     */
     @Test
     @Order(4)
     @DisplayName("Test invalid password: no lowercase letter")
@@ -72,6 +97,9 @@ class ValidatorTest {
         assertFalse(validator.validate(password).isValid(), "Password has no lowercase letter and should be invalid");
     }
 
+    /**
+     * Tests that a password without a digit is considered invalid.
+     */
     @Test
     @Order(5)
     @DisplayName("Test invalid password: no digit")
@@ -81,6 +109,9 @@ class ValidatorTest {
         assertFalse(validator.validate(password).isValid(), "Password has no digit and should be invalid");
     }
 
+    /**
+     * Tests that a password missing the sponsor keyword is considered invalid.
+     */
     @Test
     @Order(6)
     @DisplayName("Test missing sponsor")
@@ -90,6 +121,9 @@ class ValidatorTest {
         assertFalse(validator.validate(password).isValid(), "Password should be invalid without sponsor");
     }
 
+    /**
+     * Tests that a password missing the GeoGuesser country is considered invalid.
+     */
     @Test
     @Order(7)
     @DisplayName("Test missing GeoGuesser country")
