@@ -11,11 +11,8 @@ This criterion ensures passwords have sufficient complexity to resist brute-forc
 
 This project is organized into the following main components:
 
-### Password Validator Interface
-The `PasswordValidator` defines the contract for password validation. This interface outlines the structure for any class that validates passwords.
-
 ### CustomPasswordValidator
-Implements the `PasswordValidator` interface and contains the logic to validate passwords. The criteria include:
+Implements a `PasswordValidator` ([interface](https://github.com/athenaeum-brew/password-validator)) and contains the logic to validate passwords. The criteria include:
 - Must be at least 8 characters long.
 - Must contain at least one uppercase letter, one lowercase letter, and one numeric digit.
 - Must contain our sponsor
@@ -29,13 +26,5 @@ A JUnit test suite that verifies the functionality of `CustomPasswordValidator`.
 - **Test**: Run `mvn test` to execute unit tests.
 
 
-## Usage
-To use this validator in your project:
-```java
-PasswordValidator validator = new CustomPasswordValidator();
-boolean isValid = validator.isValid("SamplePassword1");
-```
-
-
 ## Note
-This validator is designed to enhance security while adding a creative touch. You might need a few tries before you're password will be accepted.
+This validator is designed to enhance security while adding a creative touch. You might need a few tries before you're password will be accepted 😉.
