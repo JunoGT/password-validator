@@ -16,10 +16,10 @@ import com.cthiebaud.passwordvalidator.ValidationResult;
  *   <li>Contains at least one uppercase letter</li>
  *   <li>Contains at least one lowercase letter</li>
  *   <li>Contains at least one digit</li>
- *   <li>Contains the specified sponsor keyword ("schwarz")</li>
- *   <li>Contains a Geoguesser like quiz in which the user has to find the country of a given Image</li>
+ *   <li>Contains the specified sponsor keyword (e.g., "schwarz")</li>
+ *   <li>Contains the specified GeoGuesser country (e.g., "Sweden")</li>
  * </ul>
- * These requirements add both security and a bit of creativity to the password policy.
+ * These requirements add both security and flexibility to the password policy.
  */
 public class PasswordLengthValidator implements PasswordValidator {
 
@@ -27,8 +27,20 @@ public class PasswordLengthValidator implements PasswordValidator {
     private static final Pattern UPPERCASE_PATTERN = Pattern.compile(".*[A-Z].*");
     private static final Pattern LOWERCASE_PATTERN = Pattern.compile(".*[a-z].*");
     private static final Pattern DIGITS_PATTERN = Pattern.compile(".*\\d.*");
-    private static final Pattern SPONSOR_PATTERN = Pattern.compile(".*schwarz.*", Pattern.CASE_INSENSITIVE);
-    private static final Pattern GEOGUESSR_PATTERN = Pattern.compile(".*sweden.*", Pattern.CASE_INSENSITIVE);
+
+    private final String sponsorKeyword; // Configurable sponsor keyword
+    private final String geoGuesserCountry; // Configurable GeoGuesser country
+
+    /**
+     * Constructor to initialize the validator with configurable sponsor and GeoGuesser country.
+     *
+     * @param sponsorKeyword the sponsor keyword required in the password
+     * @param geoGuesserCountry the GeoGuesser country required in the password
+     */
+    public PasswordLengthValidator(String sponsorKeyword, String geoGuesserCountry) {
+        this.sponsorKeyword = sponsorKeyword;
+        this.geoGuesserCountry = geoGuesserCountry;
+    }
 
     /**
      * Validates the given password based on predefined criteria.
@@ -53,12 +65,13 @@ public class PasswordLengthValidator implements PasswordValidator {
         if (!DIGITS_PATTERN.matcher(potentialPassword).matches()) {
             return new ValidationResult(false, "You don't have a Digit!");
         }
-        if (!SPONSOR_PATTERN.matcher(potentialPassword).matches()) {
-            return new ValidationResult(false, "You don't have our Sponsor included (It's Schwarz)!");
+        if (!Pattern.compile(".*" + Pattern.quote(sponsorKeyword) + ".*", Pattern.CASE_INSENSITIVE).matcher(potentialPassword).matches()) {
+            return new ValidationResult(false, "You don't have our Sponsor included (It's " + sponsorKeyword + ")!");
         }
-        if (!GEOGUESSR_PATTERN.matcher(potentialPassword).matches()) {
-            return new ValidationResult(false, "You forgot to include the correct Country, Which Country is this? https://imgur.com/a/R6mMpnn included! (Don't Cheat :) )");
+        if (!Pattern.compile(".*" + Pattern.quote(geoGuesserCountry) + ".*", Pattern.CASE_INSENSITIVE).matcher(potentialPassword).matches()) {
+            return new ValidationResult(false, "You forgot to include the correct Country (" + geoGuesserCountry + ")!");
         }
         return new ValidationResult(true, "");
     }
 }
+    
