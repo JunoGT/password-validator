@@ -67,7 +67,7 @@ public class PasswordLengthValidator implements PasswordValidator {
             return new ValidationResult(false, "You need to enter a Password!");
         }
         if (potentialPassword.length() < 8) {
-            return new ValidationResult(false, "Your Password is too short!");
+            return new ValidationResult(false, "Your Password is too short! It must be at least 8 characters long!");
         }
         if (!UPPERCASE_PATTERN.matcher(potentialPassword).matches()) {
             return new ValidationResult(false, "You don't have an Uppercase Letter!");
