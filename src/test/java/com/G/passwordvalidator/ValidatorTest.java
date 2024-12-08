@@ -1,4 +1,4 @@
-package com.G.passwordvalidator;
+package com.timo.passwordvalidator;
 
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
@@ -26,8 +26,8 @@ class ValidatorTest {
      */
     @BeforeEach
     void init() {
-        // Initialize validator with dynamic sponsor and GeoGuesser country
-        validator = new PasswordLengthValidator("Schwarz", "Sweden");
+        // Initialize validator with dynamic sponsor, GeoGuesser country, and Imgur hint
+        validator = new PasswordLengthValidator("Schwarz", "Sweden", "https://imgur.com/a/R6mMpnn");
     }
 
     /**
