@@ -27,4 +27,4 @@ A JUnit test suite that verifies the functionality of `CustomPasswordValidator`.
 
 
 ## Note
-This validator is designed to enhance security while adding a creative touch. You might need a few tries before you're password will be accepted 😉.
+This validator is designed to enhance security while adding a creative touch. You might need a few tries before your password will be accepted 😉.
