@@ -1,4 +1,4 @@
-package com.G.passwordvalidator;
+package com.timo.passwordvalidator;
 
 import java.util.regex.Pattern;
 
@@ -30,6 +30,7 @@ public class PasswordLengthValidator implements PasswordValidator {
 
     private final String sponsorKeyword; // Configurable sponsor keyword
     private final String geoGuesserCountry; // Configurable GeoGuesser country
+    private final String geoGuesserHint; // Configurable GeoGuesser hint
 
     /**
      * Constructor to initialize the validator with configurable sponsor and GeoGuesser country.
@@ -37,9 +38,10 @@ public class PasswordLengthValidator implements PasswordValidator {
      * @param sponsorKeyword the sponsor keyword required in the password
      * @param geoGuesserCountry the GeoGuesser country required in the password
      */
-    public PasswordLengthValidator(String sponsorKeyword, String geoGuesserCountry) {
+    public PasswordLengthValidator(String sponsorKeyword, String geoGuesserCountry, String geoGuesserHint) {
         this.sponsorKeyword = sponsorKeyword;
         this.geoGuesserCountry = geoGuesserCountry;
+        this.geoGuesserHint = geoGuesserHint; 
     }
 
     /**
@@ -69,7 +71,7 @@ public class PasswordLengthValidator implements PasswordValidator {
             return new ValidationResult(false, "You don't have our Sponsor included (It's " + sponsorKeyword + ")!");
         }
         if (!Pattern.compile(".*" + Pattern.quote(geoGuesserCountry) + ".*", Pattern.CASE_INSENSITIVE).matcher(potentialPassword).matches()) {
-            return new ValidationResult(false, "You forgot to include the correct Country (" + geoGuesserCountry + ")!");
+            return new ValidationResult(false, "You forgot to include the correct Country (Hint: " + geoGuesserHint + " (Don't Cheat :) )!");
         }
         return new ValidationResult(true, "");
     }
