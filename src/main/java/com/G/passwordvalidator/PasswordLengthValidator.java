@@ -37,11 +37,22 @@ public class PasswordLengthValidator implements PasswordValidator {
      *
      * @param sponsorKeyword the sponsor keyword required in the password
      * @param geoGuesserCountry the GeoGuesser country required in the password
+     * @param geoGuesserHint the hint for the GeoGuesser country
      */
     public PasswordLengthValidator(String sponsorKeyword, String geoGuesserCountry, String geoGuesserHint) {
         this.sponsorKeyword = sponsorKeyword;
         this.geoGuesserCountry = geoGuesserCountry;
-        this.geoGuesserHint = geoGuesserHint; 
+        this.geoGuesserHint = geoGuesserHint;
+    }
+
+    /**
+     * Default constructor for compatibility with the tester class.
+     * Initializes the validator with default values for sponsor and GeoGuesser country.
+     */
+    public PasswordLengthValidator() {
+        this.sponsorKeyword = "schwarz"; // Default sponsor keyword
+        this.geoGuesserCountry = "Sweden"; // Default GeoGuesser country
+        this.geoGuesserHint = "https://imgur.com/a/R6mMpnn"; // Default GeoGuesser hint
     }
 
     /**
@@ -76,4 +87,3 @@ public class PasswordLengthValidator implements PasswordValidator {
         return new ValidationResult(true, "");
     }
 }
-    
